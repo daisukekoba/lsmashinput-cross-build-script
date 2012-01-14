@@ -107,7 +107,7 @@ build_lsmashinput()
   	-L$prefix/ffms/lib -L$prefix/zlib/lib" \
   	--extra-libs="-lz"
   make
-  cp lsmashdumper.auf lsmashinput.aui lsmashmuxer.auf $work
+  cp lsmashdumper.auf lsmashinput.aui lsmashmuxer.auf $prefix
 }
 
 
