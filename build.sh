@@ -70,7 +70,9 @@ build_libav()
   ../configure --prefix=$prefix/libav \
   	--enable-cross-compile --cross-prefix=$crossprefix \
   	--target-os=mingw32 --arch=x86 \
-  	--enable-gpl --disable-yasm --disable-debug $disables
+  	--enable-gpl --disable-yasm --disable-debug $disables \
+  	--extra-cflags="-I$prefix/zlib/include" \
+  	--extra-ldflags="-L$prefix/zlib/lib"
   make && make install
 }
 build_zlib()
@@ -120,10 +122,10 @@ clone_ffms
 
 echo "--> building lsmash ---------------------------------"
 build_lsmash
-echo "--> building libav ----------------------------------"
-build_libav
 echo "--> building zlib -----------------------------------"
 build_zlib
+echo "--> building libav ----------------------------------"
+build_libav
 echo "--> building ffms -----------------------------------"
 build_ffms
 echo "--> building lsmashinput ----------------------------"
