@@ -94,8 +94,8 @@ build_ffms()
   	| sed 's/\([[:alpha:]]\{1,\}\)/-l\1/g')
   ../configure --prefix=$prefix/ffms --host=$host \
   	--with-zlib=$prefix/zlib \
-  	LIBAV_CFLAGS="-I$prefix/libav/include" \
-  	LIBAV_LIBS="-L$prefix/libav/lib $libavlibs"
+  	LIBAV_CFLAGS="-I$prefix/libav/include -I$prefix/zlib/include" \
+  	LIBAV_LIBS="-L$prefix/libav/lib $libavlibs -L$prefix/zlib/lib -lz"
   make && make install
 }
 build_lsmashinput()
