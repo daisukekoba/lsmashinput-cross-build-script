@@ -64,7 +64,7 @@ build_libav()
   [ -d $prefix/libav ] && return
   mkdir -p $work/libav/_build
   cd $work/libav/_build
-  local disables=$(echo "doc ffmpeg avconv avprobe avplay avdevice \
+  local disables=$(echo "doc avconv avprobe avplay avdevice \
   	avfilter network hwaccels encoders muxers outdevs devices filters" \
   	| sed 's/\([[:alpha:]]\{1,\}\)/--disable-\1/g')
   ../configure --prefix=$prefix/libav \
