@@ -20,9 +20,9 @@ work=$PWD
 prefix=$work/_build
 host=i686-w64-mingw32
 crossprefix=${host}-
-version=4.6.2
+gcc_version=4.6.2
 
-PATH=$PATH:/usr/local/$host/$version/bin
+PATH=$PATH:/usr/local/$host/$gcc_version/bin
 
 clone_lsmashworks()
 {
