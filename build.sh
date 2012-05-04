@@ -20,7 +20,7 @@ work=$PWD
 prefix=$work/_build
 host=i686-w64-mingw32
 crossprefix=${host}-
-gcc_version=4.6.2
+gcc_version=4.7.0
 
 PATH=$PATH:/usr/local/$host/$gcc_version/bin
 
