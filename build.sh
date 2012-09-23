@@ -22,8 +22,6 @@ host=i686-w64-mingw32
 crossprefix=${host}-
 gcc_version=4.7.0
 
-PATH=$PATH:/usr/local/$host/$gcc_version/bin
-
 clone_lsmashworks()
 {
   [ -d L-SMASH-Works ] && return
