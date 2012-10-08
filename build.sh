@@ -41,11 +41,6 @@ clone_zlib()
   [ -d zlib ] && return
   git clone https://github.com/VFR-maniac/zlib.git
 }
-clone_ffms()
-{
-  [ -d ffmpegsource ] && return
-  git clone https://github.com/VFR-maniac/ffmpegsource.git
-}
 
 
 build_lsmash()
@@ -82,28 +77,15 @@ build_zlib()
   	sh ./configure --prefix=$prefix/zlib --static
   make && make install
 }
-build_ffms()
-{
-  [ -d $prefix/ffms ] && return
-  mkdir -p $work/ffmpegsource/_build
-  cd $work/ffmpegsource/_build
-  local libavlibs=$(echo "avformat avcodec swscale avutil" \
-  	| sed 's/\([[:alpha:]]\{1,\}\)/-l\1/g')
-  ../configure --prefix=$prefix/ffms --host=$host \
-  	--with-zlib=$prefix/zlib \
-  	LIBAV_CFLAGS="-I$prefix/libav/include -I$prefix/zlib/include" \
-  	LIBAV_LIBS="-L$prefix/libav/lib $libavlibs -L$prefix/zlib/lib -lz"
-  make && make install
-}
 build_lsmashinput()
 {
   mkdir -p $work/L-SMASH-Works/AviUtl/_build
   cd $work/L-SMASH-Works/AviUtl/_build
   sh ../configure --cross-prefix=$crossprefix \
   	--extra-cflags="-I$prefix/lsmash/include -I$prefix/libav/include \
-  	-I$prefix/ffms/include -I$prefix/zlib/include" \
+  	-I$prefix/zlib/include" \
   	--extra-ldflags="-L$prefix/lsmash/lib -L$prefix/libav/lib \
-  	-L$prefix/ffms/lib -L$prefix/zlib/lib" \
+  	-L$prefix/zlib/lib" \
   	--extra-libs="-lz"
   make
   cp lsmashdumper.auf lsmashinput.aui lsmashmuxer.auf $prefix
@@ -115,7 +97,6 @@ clone_lsmashworks
 clone_lsmash
 clone_libav
 clone_zlib
-clone_ffms
 
 echo "--> building lsmash ---------------------------------"
 build_lsmash
@@ -123,8 +104,6 @@ echo "--> building zlib -----------------------------------"
 build_zlib
 echo "--> building libav ----------------------------------"
 build_libav
-echo "--> building ffms -----------------------------------"
-build_ffms
 echo "--> building lsmashinput ----------------------------"
 build_lsmashinput
 echo "--> done --------------------------------------------"
